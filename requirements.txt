@@ -1,0 +1,6 @@
+langgraph
+langchain-groq
+langgraph
+langchain_community
+faiss-cpu
+langchain_core
