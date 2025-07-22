@@ -15,7 +15,19 @@ class GraphBuilder:
         self.graph_builder.add_node("chatbot",self.GroqNode.process)
         self.graph_builder.add_edge(START,"chatbot")
         self.graph_builder.add_edge("chatbot",END)
-        
+
+
+    def basic_chatbot_build_graph_with_toll(self):
+        """
+        chat bot with tavily search
+        """
+        self.llm.bind_tools(tavily_search)
+        self.GroqNode=BasicChatBotnode(self.llm)
+        self.graph_builder.add_node("chatbot",self.GroqNode.process)
+        self.graph_builder.add_edge(START,"chatbot")
+        self.graph_builder.add_edge("chatbot",END)
+
+
     def setupGraph(self,usecase):
         if usecase=="Basic Chatbot":
             self.basic_chatbot_build_graph()

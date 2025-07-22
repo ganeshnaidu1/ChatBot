@@ -25,6 +25,7 @@ class LoadStreamlit:
                     st.warning("Please enter the API Key")
 
             self.user_controls["useCaseOptions"]=st.selectbox("Select Use case",useCaseOptions)
-
+            if self.user_controls["useCaseOptions"]=="Chatbot with tool":
+                self.user_controls["tavily_api_key"]=st.session_state["tavily_api_key"]=st.text_input("Enter the Tavily API Key",type="password")
         return self.user_controls
     

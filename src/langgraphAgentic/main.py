@@ -35,7 +35,7 @@ def load_langgraph_agentic_ui():
                 DisplayResultStreamlit(usecase,graph,user_message).display_result_on_ui()
             except:
                 raise
-
+            
     except Exception as e:
         raise
 
