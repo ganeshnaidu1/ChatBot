@@ -10,16 +10,14 @@ class DisplayResultStreamlit:
         self.user_message = user_message
 
     def display_result_on_ui(self):
-        usecase= self.usecase
+        usecase = self.usecase
         graph = self.graph
         user_message = self.user_message
-        if usecase =="Basic Chatbot":
-                graph = graph.compile()
-                for event in graph.stream({'messages':("user",user_message)}):
-                    print(event.values())
-                    for value in event.values():
-                        print(value['messages'])
-                        with st.chat_message("user"):
-                            st.write(user_message)
-                        with st.chat_message("assistant"):
-                            st.write(value["messages"].content)
+        graph = graph.compile()
+        if usecase == "Basic Chatbot" or usecase == "Chatbot with tool":
+            for event in graph.stream({'messages': ("user", user_message)}):
+                for value in event.values():
+                    with st.chat_message("user"):
+                        st.write(user_message)
+                    with st.chat_message("assistant"):
+                        st.write(value["messages"].content)

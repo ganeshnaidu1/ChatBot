@@ -29,12 +29,21 @@ def load_langgraph_agentic_ui():
             if not usecase:
                 st.error("pick an use case")
             graph_builder=GraphBuilder(model=model)
-            try:
-                graph_builder.setupGraph(usecase)
-                graph = graph_builder.get_graph()
-                DisplayResultStreamlit(usecase,graph,user_message).display_result_on_ui()
-            except:
-                raise
+            if usecase=="Chatbot with tool":
+                apiKey=user_input.get("tavily_api_key")
+                if not apiKey:
+                    st.error("Please enter the Tavily API Key")
+                else:
+                    graph_builder.setupGraph(usecase,apiKey)
+                    graph = graph_builder.get_graph()
+                    DisplayResultStreamlit(usecase,graph,user_message).display_result_on_ui()
+            else:
+                try:
+                    graph_builder.setupGraph(usecase)
+                    graph = graph_builder.get_graph()
+                    DisplayResultStreamlit(usecase,graph,user_message).display_result_on_ui()
+                except:
+                    raise
             
     except Exception as e:
         raise
